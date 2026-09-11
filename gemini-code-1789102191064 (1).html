@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Екілік код әлеміне саяхат</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #27ae60;
+            --accent: #00ffcc;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: var(--secondary);
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }
+
+        /* Interactive Switcher */
+        .bit-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .bit-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            width: 70px;
+        }
+
+        .bit-val {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .switch-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #334155;
+            color: #fff;
+            transition: 0.2s;
+        }
+
+        .switch-btn.active {
+            background: var(--secondary);
+            color: #fff;
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        .result-display {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-top: 15px;
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        /* Inputs and Buttons */
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: #fff;
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        button.action-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button.action-btn:hover {
+            background: #219653;
+        }
+
+        /* Quiz Section */
+        .quiz-item {
+            margin-bottom: 15px;
+        }
+
+        .feedback {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .correct { color: #4ade80; }
+        .incorrect { color: #f87171; }
+
+        /* Alphabet Table */
+        .table-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .table-item {
+            background: #0f172a;
+            padding: 8px;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>💻 Екілік код әлеміне саяхат</h1>
+        <p>Интерактивті оқу платформасы</p>
+    </header>
+
+    <!-- 1. ТЕОРИЯ БӨЛІМІ -->
+    <div class="card">
+        <h2>1. Негізгі терминдер</h2>
+        <ul>
+            <li><b>Екілік код</b> – тек 0 және 1 сандарынан тұратын компьютер тілі.</li>
+            <li><b>Бит</b> – ақпараттың ең кіші өлшем бірлігі (0 немесе 1).</li>
+            <li><b>Байт</b> – 8 биттен тұратын тізбек.</li>
+            <li><b>0</b> = Электр сигналы өшірулі (ток жоқ).</li>
+            <li><b>1</b> = Электр сигналы қосулы (ток бар).</li>
+        </ul>
+    </div>
+
+    <!-- 2. ИНТЕРАКТИВТІ СИМУЛЯТОР -->
+    <div class="card">
+        <h2>2. Екілік разрядтар симуляторы (16, 8, 4, 2, 1)</h2>
+        <p>Қосқыштарды басу арқылы ондық санның қалай құралатынын байқаңыз:</p>
+        
+        <div class="bit-container">
+            <div class="bit-box"><span class="bit-val">16</span><button class="switch-btn" onclick="toggleBit(this, 16)">0</button></div>
+            <div class="bit-box"><span class="bit-val">8</span><button class="switch-btn" onclick="toggleBit(this, 8)">0</button></div>
+            <div class="bit-box"><span class="bit-val">4</span><button class="switch-btn" onclick="toggleBit(this, 4)">0</button></div>
+            <div class="bit-box"><span class="bit-val">2</span><button class="switch-btn" onclick="toggleBit(this, 2)">0</button></div>
+            <div class="bit-box"><span class="bit-val">1</span><button class="switch-btn" onclick="toggleBit(this, 1)">0</button></div>
+        </div>
+
+        <div class="result-display">
+            Екілік код: <b id="bin-result" style="color: var(--accent);">00000</b> | 
+            Ондық сан: <b id="dec-result" style="color: #4ade80;">0</b>
+        </div>
+    </div>
+
+    <!-- 3. ТАПСЫРМА: САНДАРДЫ АУЫСТЫРУ -->
+    <div class="card">
+        <h2>3. Түсінгеніңді тексер: Санды екілік кодқа айналдыр</h2>
+        <p>Төмендегі ондық сандардың 5-биттік екілік кодын жазыңыз (Мысалы: 13 = 01101):</p>
+        
+        <div class="quiz-item">
+            <label>9 саны екілік кодта: </label>
+            <input type="text" id="q1-input" placeholder="01001">
+            <button class="action-btn" onclick="checkBinary('q1-input', '01001', 'q1-fb')">Тексеру</button>
+            <span id="q1-fb" class="feedback"></span>
+        </div>
+
+        <div class="quiz-item">
+            <label>18 саны екілік кодта: </label>
+            <input type="text" id="q2-input" placeholder="10010">
+            <button class="action-btn" onclick="checkBinary('q2-input', '10010', 'q2-fb')">Тексеру</button>
+            <span id="q2-fb" class="feedback"></span>
+        </div>
+    </div>
+
+    <!-- 4. ҚҰПИЯ ХАБАРЛАМА -->
+    <div class="card">
+        <h2>4. Құпия хабарламаны шеш</h2>
+        <p>Кодты шифрдан босатыңыз: <b>10010 01111 00010 01111 10100</b></p>
+        <p><small>(Көмек: 10010=Р, 01111=О, 00010=Б, 10100=Т)</small></p>
+        
+        <input type="text" id="secret-input" placeholder="Сөзді жазыңыз">
+        <button class="action-btn" onclick="checkSecret()">Тексеру</button>
+        <div id="secret-fb" class="feedback"></div>
+    </div>
+
+    <!-- 5. ӨЗ ЕСІМІҢДІ КОДТА -->
+    <div class="card">
+        <h2>5. Өз есіміңді екілік кодқа айналдыр</h2>
+        <p>Атыңызды ағылшын/латын әріптерімен немесе сандармен жазып тексеріңіз:</p>
+        <input type="text" id="name-input" placeholder="Мысалы: ALMAS">
+        <button class="action-btn" onclick="encodeName()">Кодтау</button>
+        
+        <div class="result-display" id="name-result" style="margin-top: 15px;"></div>
+    </div>
+</div>
+
+<script>
+    // 1. Bit Switcher logic
+    let currentTotal = 0;
+    let bits = {16: 0, 8: 0, 4: 0, 2: 0, 1: 0};
+
+    function toggleBit(btn, val) {
+        if (bits[val] === 0) {
+            bits[val] = 1;
+            btn.innerText = "1";
+            btn.classList.add("active");
+        } else {
+            bits[val] = 0;
+            btn.innerText = "0";
+            btn.classList.remove("active");
+        }
+
+        // Calculate Decimal
+        currentTotal = (bits[16]*16) + (bits[8]*8) + (bits[4]*4) + (bits[2]*2) + (bits[1]*1);
+        
+        // Calculate Binary String
+        let binStr = `${bits[16]}${bits[8]}${bits[4]}${bits[2]}${bits[1]}`;
+
+        document.getElementById('bin-result').innerText = binStr;
+        document.getElementById('dec-result').innerText = currentTotal;
+    }
+
+    // 2. Check Binary Quiz Answers
+    function checkBinary(inputId, correctAnswer, feedbackId) {
+        let userAns = document.getElementById(inputId).value.trim();
+        let fb = document.getElementById(feedbackId);
+
+        if (userAns === correctAnswer) {
+            fb.innerText = " Өте дұрыс!";
+            fb.className = "feedback correct";
+        } else {
+            fb.innerText = " ❌ Қате. Қайтадан байқап көріңіз.";
+            fb.className = "feedback incorrect";
+        }
+    }
+
+    // 3. Secret Message Check
+    function checkSecret() {
+        let userAns = document.getElementById('secret-input').value.trim().toUpperCase();
+        let fb = document.getElementById('secret-fb');
+
+        if (userAns === "РОБОТ") {
+            fb.innerText = " Жарайсың! Өте дұрыс таптың!";
+            fb.className = "feedback correct";
+        } else {
+            fb.innerText = " ❌ Қате. Әріптер кодын қайта тексер.";
+            fb.className = "feedback incorrect";
+        }
+    }
+
+    // 4. Name Encoder
+    function encodeName() {
+        let name = document.getElementById('name-input').value.trim();
+        let resultDiv = document.getElementById('name-result');
+        
+        if(!name) {
+            resultDiv.innerText = "Өтініш, есіміңізді енгізіңіз!";
+            return;
+        }
+
+        let encoded = "";
+        for (let i = 0; i < name.length; i++) {
+            let bin = name[i].charCodeAt(0).toString(2);
+            // Pad to 8 bits
+            bin = "0".repeat(8 - bin.length) + bin;
+            encoded += `<b>${name[i]}</b>: ${bin} <br>`;
+        }
+
+        resultDiv.innerHTML = encoded;
+    }
+</script>
+
+</body>
+</html>
